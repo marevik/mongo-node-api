@@ -5,7 +5,10 @@ const morgan =require("morgan");
 const mongoose = require("mongoose");
 const User = require("./models/user");
 const bodyParser= require("body-parser");
-const userRoutes = require("./routes/userRoutes")
+const userRoutes = require("./routes/userRoutes");
+// const authRoutes = require("./routes/authRoutes");
+const Order = require("./models/order");
+const orderRoutes = require("./routes/orderRoutes");
 
 const app =express();
 mongoose.connect("mongodb://localhost:27017/nodeApi");
@@ -31,7 +34,8 @@ app.all((req, res, next)=>{
     next();
 })
 
-
+app.use("/order", orderRoutes);
+// app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
 
 app.use((req, res, next)=>{
